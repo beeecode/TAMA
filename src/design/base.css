@@ -1,0 +1,326 @@
+/* ---------------------------------------------------------------------------
+   The CSS entry point. This is the only stylesheet main.tsx imports; the
+   others come in through the @import chain below, which Tailwind resolves
+   itself so the @theme block in tokens.css reaches the utility generator.
+--------------------------------------------------------------------------- */
+
+@import "./fonts.css";
+@import "tailwindcss";
+@import "./tokens.css";
+
+/* Tailwind scans these files for class names. */
+@source "../";
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: var(--font-sans);
+  font-optical-sizing: auto;
+  background-color: var(--color-canvas);
+  color: var(--color-text-primary);
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+}
+
+/* Scrollbars stay out of the way until the pointer is over the region. */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-border-strong);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-tertiary);
+}
+* {
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+*:hover {
+  scrollbar-color: var(--color-border-strong) transparent;
+}
+
+/* Figures line up in columns. */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+@keyframes confidence-fill {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-in-right {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.24s ease-out forwards;
+}
+.animate-slide-in-right {
+  animation: slide-in-right 0.28s cubic-bezier(0.2, 0, 0, 1) forwards;
+}
+.animate-spin-slow {
+  animation: spin 1.5s linear infinite;
+}
+
+/* ---------------------------------------------------------------------------
+   Motion.
+   Everything here is short and settles quickly — the point is that the
+   interface answers you, not that it performs. All of it is disabled under
+   prefers-reduced-motion at the bottom of this file.
+--------------------------------------------------------------------------- */
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pop-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    box-shadow: 0 0 0 0 rgba(95, 99, 201, 0.35);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(95, 99, 201, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(95, 99, 201, 0);
+  }
+}
+
+@keyframes draw-check {
+  from {
+    stroke-dashoffset: 16;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Content arriving. Add --i on children for a stagger. */
+.rise {
+  animation: rise-in 0.34s var(--ease-out) both;
+  animation-delay: calc(var(--i, 0) * 45ms);
+}
+
+.pop {
+  animation: pop-in 0.26s var(--ease-spring) both;
+  animation-delay: calc(var(--i, 0) * 45ms);
+}
+
+/* Every routed page enters the same way. */
+.page-enter {
+  animation: rise-in 0.28s var(--ease-out) both;
+}
+
+/* Anything you can click should answer the pointer. */
+.lift {
+  transition:
+    transform 0.18s var(--ease-out),
+    box-shadow 0.18s var(--ease-out),
+    border-color 0.18s var(--ease-out);
+}
+
+.lift:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-el2);
+}
+
+.lift:active {
+  transform: translateY(0);
+  transition-duration: 0.08s;
+}
+
+.press {
+  transition: transform 0.12s var(--ease-out);
+}
+
+.press:active {
+  transform: scale(0.97);
+}
+
+/* A row that slides a touch on hover reads as a list you can move through. */
+.row-hover {
+  transition:
+    background 0.16s var(--ease-out),
+    padding-left 0.16s var(--ease-out);
+}
+
+.row-hover:hover {
+  background: var(--color-surface-hover);
+  padding-left: 22px;
+}
+
+.pulse-ring {
+  animation: pulse-ring 2s var(--ease-out) infinite;
+}
+
+.draw-check path {
+  stroke-dasharray: 16;
+  animation: draw-check 0.35s var(--ease-out) both;
+}
+
+/* Numbers that land rather than appear. */
+.tick-in {
+  animation: pop-in 0.3s var(--ease-spring) both;
+}
+
+/* ---------------------------------------------------------------------------
+   Marketing.
+   The product screens are deliberately plain. These are the few places the
+   page is allowed some warmth and personality.
+--------------------------------------------------------------------------- */
+
+/* One or two words per headline, never a sentence.
+   Rubik's italic against Bricolage's upright is the contrast that carries the
+   emphasis — light weight so it reads as a change of voice, not a shout. */
+.accent {
+  font-family: var(--font-sans);
+  font-style: italic;
+  font-weight: 350;
+  letter-spacing: -0.015em;
+}
+
+/* A soft bloom behind the hero. The page underneath stays white. */
+.bloom {
+  position: relative;
+  isolation: isolate;
+}
+
+.bloom::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: -10% -5% auto -5%;
+  height: 560px;
+  background:
+    radial-gradient(60% 55% at 22% 20%, rgba(139, 143, 232, 0.16), transparent 70%),
+    radial-gradient(45% 45% at 82% 8%, rgba(233, 214, 184, 0.28), transparent 70%);
+  pointer-events: none;
+}
+
+@keyframes marquee-drift {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Logos drift rather than sit in a dead row. */
+.marquee {
+  overflow: hidden;
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 12%,
+    #000 88%,
+    transparent
+  );
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-drift 38s linear infinite;
+}
+
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+/* Slight rotation on a card reads as placed by a person, not a grid. */
+.tilt-left {
+  transform: rotate(-1.4deg);
+}
+
+.tilt-right {
+  transform: rotate(1.2deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+}
+
+/* Hatching marks a forecast the model is still learning — it should never
+   read as solid data. */
+.hatch-overlay {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    rgba(95, 99, 201, 0.15) 0px,
+    rgba(95, 99, 201, 0.15) 2px,
+    transparent 2px,
+    transparent 8px
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

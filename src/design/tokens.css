@@ -1,0 +1,61 @@
+/* ---------------------------------------------------------------------------
+   Design tokens — Tailwind v4 theme.
+   Every name here becomes a utility: --color-action gives bg-action,
+   text-action, border-action, and so on.
+--------------------------------------------------------------------------- */
+
+@theme {
+  /* Surfaces.
+     The canvas is white. With cards also white, separation is carried by the
+     border and a soft shadow rather than by a tint — so the border tokens
+     below do real work and should not be softened further. */
+  --color-canvas: #ffffff;
+  --color-surface: #ffffff;
+  --color-surface-sunk: #f7f7f9;
+  --color-surface-hover: #f3f3f6;
+  --color-border: #eaeaef;
+  --color-border-strong: #d5d5de;
+
+  --color-text-primary: #16161d;
+  --color-text-secondary: #62626f;
+  --color-text-tertiary: #9494a3;
+
+  /* Action — the primary control colour. Black, matched to the text ink. */
+  --color-action: #16161d;
+  --color-action-hover: #000000;
+  --color-action-subtle: #f0f0f4;
+
+  /* AI — periwinkle marks anything TAMA generated or inferred. It is the one
+     hue allowed to mean "not written by a person". */
+  --color-ai: #8b8fe8;
+  --color-ai-strong: #5f63c9;
+  --color-ai-mid: #b9bcf0;
+  --color-ai-faint: #dcddf8;
+  --color-ai-subtle: #eeeffc;
+
+  /* Delivery status. Semantic — never used decoratively. */
+  --color-on-track: #2f9e6b;
+  --color-at-risk: #e0a32e;
+  --color-slipping: #d64545;
+  --color-pending: #a0a0ae;
+
+  /* Headings and display. Variable optical size does the work here. */
+  --font-tight: "Bricolage Grotesque", "Inter Tight", sans-serif;
+  --font-sans: "Rubik", "Inter", sans-serif;
+  --font-mono: "Geist Mono", "IBM Plex Mono", monospace;
+
+  /* Warm tints. The page stays white; these are for inset panels only, so
+     a long scroll has some temperature instead of reading as a spec sheet. */
+  --color-wash-cool: #fafaff;
+  --color-wash-warm: #fdfbf7;
+  --color-wash-sand: #f7f5f1;
+
+  --shadow-el1: 0 1px 2px rgba(22, 22, 29, 0.05);
+  --shadow-el2: 0 4px 12px rgba(22, 22, 29, 0.07), 0 1px 3px rgba(22, 22, 29, 0.05);
+  --shadow-el3: 0 16px 48px rgba(22, 22, 29, 0.12), 0 2px 8px rgba(22, 22, 29, 0.06);
+
+  /* Motion. One easing curve for everything that moves, so the whole product
+     accelerates and settles the same way. */
+  --ease-out: cubic-bezier(0.2, 0, 0, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}

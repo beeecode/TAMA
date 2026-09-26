@@ -1,0 +1,20 @@
+/* ---------------------------------------------------------------------------
+   Typefaces.
+
+   The families are requested from index.html with a <link> and preconnect, so
+   the fetch starts before this stylesheet has parsed. Nothing is imported
+   here — this file only documents the pairing.
+
+     Bricolage Grotesque   headings and display. Variable: opsz 12–96,
+                           wght 200–800. Its quirks are the point; it is what
+                           stops the product reading as another SaaS template.
+     Rubik                 everything read at length, plus UI labels.
+                           Variable: wght 300–900 with a true italic, which is
+                           what accent words in a headline use.
+     Geist Mono            figures only — forecast dates, percentages, counts.
+                           Kept because numbers that update in place have to
+                           line up in a column.
+
+   Optical sizing is left on `auto` in base.css, so Bricolage adjusts its
+   contrast between a 13px label and a 62px headline on its own.
+--------------------------------------------------------------------------- */
